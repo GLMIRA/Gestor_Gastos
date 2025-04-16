@@ -9,9 +9,9 @@ struct User{
 };
 
 struct Expense{
-    bool typeExpense; 
-    char nameExpense[50];
-    float amount = 0.0;
+    bool typeExpense; // se é obrigatoria ou nao (sendo TRUE obrigatoria e FALSE nao obrigatoria) 
+    char nameExpense[50]; // nome exp: LUZ,AGUA,NET
+    float amount = 0.0;// valor da conta 
     
 };
 #endif
