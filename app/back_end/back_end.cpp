@@ -96,6 +96,7 @@ bool validate_name(const string &name_user, const string &last_name){
 
 }
 
+//TODO : verifica se idade não é negativo 
 bool validate_age(const string &age_user){
 
     /** 
@@ -108,7 +109,7 @@ bool validate_age(const string &age_user){
      */
 
      for(char c_digit : age_user){
-        if(!isdigit(c_digit) && c_digit != ','){
+        if(!isdigit(c_digit) && c_digit != ' '){
             return false;
         }
      }
