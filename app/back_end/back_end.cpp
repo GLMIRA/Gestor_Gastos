@@ -98,6 +98,72 @@ bool validate_name(const string &name_user, const string &last_name){
 
 bool validate_age(const string &age_user){
 
-     
+    /** 
+     * @brief valida a idade do usuario.
+     * 
+     * @param age_user idade do usuario.
+     * 
+     * @return retorna verdadeiro for valido falso se 
+     * for invalido.
+     */
+
+     for(char c_digit : age_user){
+        if(!isdigit(c_digit) && c_digit != ','){
+            return false;
+        }
+     }
+     return true;
 
 }
+
+bool validate_salary(const string &salary){
+        /** 
+     * @brief valida se o usuario digitou o salario corretamente 0000,00.
+     * 
+     * @param salary salario do usaurio -> string
+     * @var cont_virgula verifica se tem mais de uma virgula -> int
+     * 
+     * @return retorna verdadeiro for valido falso se 
+     * for invalido.
+     */
+    int cont_vigula =0;
+
+    for(char c_digit_salary : salary){
+        
+        if(!isdigit(c_digit_salary) && c_digit_salary != ','){
+            return false;
+        }
+
+        if(c_digit_salary == 'c'){
+            c_digit_salary ++;
+        }
+
+        if(c_digit_salary > 1){
+            return false;
+        }
+    }
+    return true;
+}
+
+int validate_user(const string &cpf_formatted, const string &first_name,
+const string &last_name, const string &age_user, const string &salary){
+
+    int error;
+
+    if(!validate_cpf(cpf_formatted)){
+        return error = 1; 
+    }
+    if(!validate_name(first_name,last_name)){
+        return error = 2;
+    }
+    if(!validate_age(age_user)){
+        return error = 3;
+    }
+    if(!validate_salary(salary)){
+        return error = 4;
+    }
+    else{
+        return error = 0;
+    }
+}
+
