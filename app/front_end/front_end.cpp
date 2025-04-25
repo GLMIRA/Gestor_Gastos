@@ -1,36 +1,41 @@
 //Bibliotecas
-#include <stdio.h>
+#include <iostream>
+#include <cstring>
+#include <cctype>
+#include <string>
 
 //Modulos
 #include "dados/estructs_dados.hpp"
 #include "constantes.hpp"
 
+using namespace std;
+
 //Codigo☺
 void menu(){
 
-    //variaveis
-    char option;
-
-    printf("");//aqui vai ficar a apresentação de tela
-
-    printf("");//aqui ira ficar a mensagem "DIGITE UM VALOR" -> obs: a mensagem so serve para dar um noção do que fazer depois 
-
-    scanf("%c",&option);
-
-    switch (option)
-    {
-    case 'C':
-        /*aqui ira ficar o codigo quando o usuario for criar uma nova conta*/
-        break;
+    // Variaveis
     
+
+    /*switch ()
+    {
+    case 'c':
+    case 'C':
+
+       // cout << "Digite o nome: ";
+       // getline(cin,batata);
+
+    break;
+
+    case 'l':
     case 'L':
-        /*aqui ira ficar o codigo quando o usuario for logar na sua conta*/
-        break;
+
+    break;
 
         
 
     default:
+    printf("\n|**************|\n| Wrong value! |\n**************\n");   
     break;
-}
-printf("\n|**************|\n| Wrong value! |\n**************\n");☺☻↨
+    }
+    */
 }
