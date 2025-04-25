@@ -1,6 +1,8 @@
 #ifndef ESTRUTURA_DADOS_HPP
 #define ESTURUTRA_DADOS_HPP
 
+#include <string>
+
 using namespace std;
 struct User{
     string name;

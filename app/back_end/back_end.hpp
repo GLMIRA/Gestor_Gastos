@@ -1,6 +1,10 @@
 #ifndef BACK_END
 #define BACK_END
 
-bool validate_cpf(User user[], int &range_user);
+#include <string>
+
+using namespace std;
+
+bool validate_cpf(const string &cpf_formatado);
 
 #endif
