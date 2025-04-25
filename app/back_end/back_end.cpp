@@ -1,22 +1,34 @@
 #include <iostream>
 #include <cstring>
 #include <cctype>
+#include <string>
 
 // Modulos
 #include "dados/estructs_dados.hpp"
 #include "constantes.hpp"
 
-bool validate_cpf(User user[], int* range_user) {
-    const char* cpf_formatado = user[*range_user].cpf;
+using namespace std;
 
+bool validate_cpf(const string &cpf_formatado) {
+    /**
+     * @brief recebe uma variavel com um cpf e verifica se é valido
+     * 
+     * @param cpf_formatado -> string
+     * recebe uma string com verifica se ela tem 14 caracteres
+     * verifica se não é um cpf invalido conhecido(por comparacao) 
+     * transforma ela em um vetor de inteiros de 11 caracters 
+     * valida os digitos verificadores 
+     * 
+     * @return verdadeiro se for valido falso se for invalido 
+     */
     // Verifica se o tamanho é 14
-    if (std::strlen(cpf_formatado) != 14) return false;
+    if (cpf_formatado.length() != 14) return false;
 
     // Verifica formato: XXX.XXX.XXX-XX
     for (int i = 0; i < 14; i++) {
         if ((i == 3 || i == 7) && cpf_formatado[i] != '.') return false;
         else if (i == 11 && cpf_formatado[i] != '-') return false;
-        else if (i != 3 && i != 7 && i != 11 && !std::isdigit(cpf_formatado[i])) return false;
+        else if (i != 3 && i != 7 && i != 11 && !isdigit(cpf_formatado[i])) return false;
     }
 
     // Verifica CPFs inválidos conhecidos
@@ -27,13 +39,13 @@ bool validate_cpf(User user[], int* range_user) {
         "999.999.999-99"
     };
     for (const char* invalido : invalidos) {
-        if (std::strcmp(cpf_formatado, invalido) == 0) return false;
+        if (strcmp(cpf_formatado.c_str(), invalido) == 0) return false;
     }
 
     // Extrai apenas os números
     int cpf[11], j = 0;
     for (int i = 0; i < 14; i++) {
-        if (std::isdigit(cpf_formatado[i])) {
+        if (isdigit(cpf_formatado[i])) {
             cpf[j++] = cpf_formatado[i] - '0';
         }
     }
@@ -57,3 +69,35 @@ bool validate_cpf(User user[], int* range_user) {
 }
 
 
+bool validate_name(const string &name_user, const string &last_name){
+
+    /** 
+     * @brief valida o primeiro e ultimo nome do usuario.
+     * 
+     * @param name_usaer Primeiro nome.
+     * @param last_name Ultimo nome.
+     * 
+     * @return retorna verdadeiro forem validos falso se 
+     * forem invalidos.
+     */
+    
+
+    for(char c_name : name_user){
+        if(!isalpha(c_name) && c_name != ' '){
+            return false;
+        }
+    }
+    for(char c_lastName : last_name){
+        if(!isalpha(c_lastName) && c_lastName != ' '){
+            return false;
+        }
+    }
+    return true;
+
+}
+
+bool validate_age(const string &age_user){
+
+     
+
+}

@@ -1,9 +1,11 @@
 #ifndef ESTRUTURA_DADOS_HPP
 #define ESTURUTRA_DADOS_HPP
 
+using namespace std;
 struct User{
-    char name[50];
-    char cpf[11];
+    string name;
+    string last_name;
+    char cpf[14];
     int age = 0;
     float salary = 0.0;
 };
