@@ -104,21 +104,28 @@ bool validate_age(const string &age_user){
      * 
      * @param age_user idade do usuario.
      * 
-     * @return retorna verdadeiro for valido falso se 
+     * @return retorna verdadeiro for valido, falso se 
      * for invalido.
      */
-
-     for(char c_digit : age_user){
-        if(!isdigit(c_digit) && c_digit != ' '){
+     try
+     {
+        int age = stoi(age_user);
+        if (age < 0){
             return false;
-        }
+        } 
+
+        return true;
      }
-     return true;
+     catch(const std::exception& e)
+     {
+        return false;
+     }
+     
 
 }
 
-bool validate_salary(const string &salary){
-        /** 
+bool validate_salary(const string &salary_user){
+    /** 
      * @brief valida se o usuario digitou o salario corretamente 0000,00.
      * 
      * @param salary salario do usaurio -> string
@@ -127,25 +134,22 @@ bool validate_salary(const string &salary){
      * @return retorna verdadeiro for valido falso se 
      * for invalido.
      */
-    int cont_vigula =0;
-
-    for(char c_digit_salary : salary){
-        
-        if(!isdigit(c_digit_salary) && c_digit_salary != ','){
+    
+    try
+    {
+        float salary = stof(salary_user);
+        if (salary < 0){
             return false;
         }
-
-        if(c_digit_salary == 'c'){
-            c_digit_salary ++;
-        }
-
-        if(c_digit_salary > 1){
-            return false;
-        }
+        return true;
     }
-    return true;
-}
+    catch(const std::exception& e)
+    {
+        return false;
+    }
+    
 
+}
 int validate_user(const string &cpf_formatted, const string &first_name,
 const string &last_name, const string &age_user, const string &salary){
 
