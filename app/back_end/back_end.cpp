@@ -3,8 +3,7 @@
 #include <cctype>
 #include <string>
 
-// Modulos
-#include "dados/structs_dados.hpp"
+// Modulos  
 #include "constantes.hpp"
 
 using namespace std;
@@ -36,7 +35,7 @@ bool validate_cpf(const string &cpf_formatado) {
         "000.000.000-00", "111.111.111-11", "222.222.222-22",
         "333.333.333-33", "444.444.444-44", "555.555.555-55",
         "666.666.666-66", "777.777.777-77", "888.888.888-88",
-        "999.999.999-99"
+        "999.999.999-99","123.456.789-09"
     };
     for (const char* invalido : invalidos) {
         if (strcmp(cpf_formatado.c_str(), invalido) == 0) return false;
@@ -96,7 +95,6 @@ bool validate_name(const string &name_user, const string &last_name){
 
 }
 
-//TODO : verifica se idade não é negativo 
 bool validate_age(const string &age_user){
 
     /** 
@@ -121,7 +119,6 @@ bool validate_age(const string &age_user){
         return false;
      }
      
-
 }
 
 bool validate_salary(const string &salary_user){
@@ -155,20 +152,11 @@ const string &last_name, const string &age_user, const string &salary){
 
     int error;
 
-    if(!validate_cpf(cpf_formatted)){
-        return error = 1; 
-    }
-    if(!validate_name(first_name,last_name)){
-        return error = 2;
-    }
-    if(!validate_age(age_user)){
-        return error = 3;
-    }
-    if(!validate_salary(salary)){
-        return error = 4;
-    }
-    else{
-        return error = 0;
-    }
+    if(!validate_cpf(cpf_formatted)) return error = 1; 
+    if(!validate_name(first_name,last_name))return error = 2;
+    if(!validate_age(age_user)) return error = 3;
+    if(!validate_salary(salary))return error = 4;
+    else return error = 0;
+    
 }
 

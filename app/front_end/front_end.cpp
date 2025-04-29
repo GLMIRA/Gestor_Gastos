@@ -52,7 +52,6 @@ void menu(){
 
         switch (response)
         {
-            //TODO: Edita isso response nao guarda nada 
         case 1:
             menssager = "CPF invalido ou fora do padrao xxx.xxx.xxx-xx";
         break;
