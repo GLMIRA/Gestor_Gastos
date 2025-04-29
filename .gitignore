@@ -1,3 +1,48 @@
+# Ignora arquivos de compilação do CMake
+/build/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+*.o
+*.a
+*.so
+*.exe
+
+# Ignora arquivos temporários e de sistema
+.DS_Store
+Thumbs.db
+*.swp
+
+# Ignora a pasta do vcpkg (caso tenha feito instalação local no seu projeto)
+vcpkg/
+
+# Ignora arquivos específicos do WSL
+*.log
+*.bak
+*.tmp
+
+# Ignora configurações do VSCode
+.vscode/
+
+# Ignora arquivos de backup do editor (ex: vim, emacs)
+*~
+
+# Ignora arquivos temporários de compilação C++
+*.out
+*.obj
+*.exe
+
+# Ignora a pasta de build do projeto
+build/
+
+# Caso tenha algum arquivo de configuração do IDE, como o CLion ou o Visual Studio:
+.idea/
+
+# Ignorar arquivos temporários de editores (por exemplo, vim, emacs)
+*.swp
+
 # Prerequisites
 *.d
 
@@ -31,5 +76,6 @@
 *.out
 *.app
 
-*.vscode
-*gestor_gastos
+# Ignora a pasta de build do projeto
+gestor_gastos 
+Gestor_Gastos
