@@ -4,7 +4,7 @@
 #include <string>
 
 // Modulos
-#include "dados/estructs_dados.hpp"
+#include "dados/structs_dados.hpp"
 #include "constantes.hpp"
 
 using namespace std;

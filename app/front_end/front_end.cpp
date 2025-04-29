@@ -5,7 +5,8 @@
 #include <string>
 
 //Modulos
-#include "dados/estructs_dados.hpp"
+#include  "back_end/back_end.hpp"
+#include "dados/structs_dados.hpp"
 #include "constantes.hpp"
 
 using namespace std;
@@ -16,11 +17,13 @@ void menu(){
     // Variaveis
     char option;
     int response;
+    string menssager;
     string fist_name,last_name,age,salary,cpf;
 
+    scanf("%c",&option);
+    getchar();
+    switch (option){
 
-    switch (option)
-    {
     case 'c':
     case 'C':
 
@@ -31,45 +34,44 @@ void menu(){
         cout << "Digite o CPF:\t";
         getline(cin,cpf);
 
-        cout << "Digite o Primeiro Nome:\t";
+        cout << "Digite o Primeiro Nome: ";
         getline(cin,fist_name);
 
-        cout << "Digite o Sobrenome:\t";
+        cout << "Digite o Sobrenome: ";
         getline(cin,last_name);
 
-        cout << "Digite a Idade:\t";
+        cout << "Digite a Idade: ";
         getline(cin,age);
 
-        cout << "Digite o Salario:\t";
+        cout << "Digite o Salario: ";
         getline(cin,salary);
 
         //codigo que envia as informações do usuario para a funcao validate_user
-        response=validate_user(cpf,fist_name,last_name,age,salary);
-
+        response = validate_user(cpf,fist_name,last_name,age,salary);
 
 
         switch (response)
         {
             //TODO: Edita isso response nao guarda nada 
         case 1:
-            response = 'CPF invalido ou fora do padrao xxx.xxx.xxx-xx';
+            menssager = "CPF invalido ou fora do padrao xxx.xxx.xxx-xx";
         break;
 
         case 2:
-            response = 'Nome tem numeros ou caracteres especiais';
+            menssager = "Nome tem numeros ou caracteres especiais";
         break;
 
         case 3:
-            response = 'Idade tem letras o caracteres especiais ';
+            menssager = "Idade tem letras o caracteres especiais ";
         break;
 
         case 4:
-            response = 'Salario tem letras, caracteres especiais ou nao esta no formato 0000,00';
+            menssager = "Salario tem letras, caracteres especiais ou nao esta no formato 0000,00";
         break;
         }
 
         if(response>0){
-            cout << "\n!ERRO: " << response << " !\n";
+            cout << "\n!ERRO: " <<menssager << " !\n";
         }else{
             cout << "\n Usuario Criado com Sucesso!\n";
         }
