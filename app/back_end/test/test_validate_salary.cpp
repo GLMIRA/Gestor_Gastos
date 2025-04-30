@@ -10,7 +10,7 @@ TEST(validateSalaryTest, validateSalary){
 TEST(validateSalaryTest, invalidSalary){
     EXPECT_FALSE(validate_salary("letras"));
     EXPECT_FALSE(validate_salary("~´];~´-#$@"));
-    EXPECT_FALSE(validate_salary(" "));
+    EXPECT_FALSE(validate_salary("  "));
 }
 
 
