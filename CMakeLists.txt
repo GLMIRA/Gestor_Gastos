@@ -37,6 +37,7 @@ set(TEST_SOURCES
     app/back_end/test/test_validate_cpf.cpp  # <- adicionado aqui
     app/back_end/test/test_validate_salary.cpp
     app/back_end/test/test_validate_age.cpp
+    app/back_end/test/test_validate_name.cpp
 )
 
 # Executável de testes

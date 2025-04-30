@@ -31,19 +31,24 @@ void menu(){
 
         //Aqui sera o lugar onde o Usuario ira digitar as suas informações
 
-        cout << "Digite o CPF:\t";
+        cout <<"Digite o CPF: ";
         getline(cin,cpf);
 
-        cout << "Digite o Primeiro Nome: ";
+        cout <<"Digite o Primeiro Nome: ";
         getline(cin,fist_name);
 
-        cout << "Digite o Sobrenome: ";
+        cout <<"Digite o Sobrenome: ";
         getline(cin,last_name);
 
-        cout << "Digite a Idade: ";
+        /*TODO: mudança de planos, o usuario n pode ter menos que 14 anos e vai inserir a data
+        nascimento no formato dd/mm/aaaa(back-end espera receber dessa forma blzz ??)
+        vou retornar dois possiveis erros 
+        data_nacimento invalida ou usuario com idadde menor que a permitida blzz??
+        */
+        cout <<"Digite a Idade: ";
         getline(cin,age);
 
-        cout << "Digite o Salario: ";
+        cout <<"Digite o Salario: ";
         getline(cin,salary);
 
         //codigo que envia as informações do usuario para a funcao validate_user
