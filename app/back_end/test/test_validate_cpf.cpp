@@ -20,5 +20,5 @@ TEST(ValidateCPFTest, InvalidKnownCPFs) {
 }
 
 TEST(ValidateCPFTest, InvalidCheckDigits) {
-    EXPECT_FALSE(validate_cpf("529.982.247-26")); // Alterado último dígito
+    EXPECT_FALSE(validate_cpf("529.982.247-26")); 
 }

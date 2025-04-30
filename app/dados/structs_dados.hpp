@@ -8,6 +8,7 @@
 
 using namespace std;
 struct Expense{
+    int id;
     bool typeExpense; // se é obrigatoria ou nao (sendo TRUE obrigatoria e FALSE nao obrigatoria) 
     char nameExpense[50]; // nome exp: LUZ,AGUA,NET
     float amount = 0.0;// valor da conta 
@@ -15,6 +16,7 @@ struct Expense{
 };
 
 struct User{
+    int id;
     string name;
     string last_name;
     char cpf[14];

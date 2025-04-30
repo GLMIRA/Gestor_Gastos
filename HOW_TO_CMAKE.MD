@@ -14,8 +14,8 @@ sudo apt install cmake
 ### Para Arch Linux:
 
 ```bash
-sudo pacman -S cmake
-```
+sudo pa-S cmake
+```cman 
 
 ### Para Fedora:
 
