@@ -6,6 +6,8 @@
 // Modulos  
 #include "constantes.hpp"
 
+//TODO: adicionar função pra validar ultimo nome.
+
 using namespace std;
 
 bool validate_cpf(const string &cpf_formatado) {
@@ -95,6 +97,7 @@ bool validate_name(const string &name_user, const string &last_name){
 
 }
 
+//TODO: refatorar a função para receber uma data no formato dd/mm/aaaa
 bool validate_age(const string &age_user){
 
     /** 
