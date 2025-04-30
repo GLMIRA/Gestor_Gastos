@@ -1,0 +1,17 @@
+name: Validate branch name
+
+on:
+  pull_request:
+    branches: [main, developer]
+
+jobs:
+  validate-branch-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch name format
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          if [[ ! "$BRANCH_NAME" =~ ^(feature|hotfix|bugfix|release)/.+$ ]]; then
+            echo "❌ Nome de branch inválido: '$BRANCH_NAME'. Use os prefixos: feature/, hotfix/, bugfix/, release/"
+            exit 1
+          fi
