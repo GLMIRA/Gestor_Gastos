@@ -1,0 +1,36 @@
+name: Run Unit Tests with GTest
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install cmake g++ -y
+
+    - name: Set up vcpkg
+      run: |
+        ./vcpkg/bootstrap-vcpkg.sh
+
+    - name: Configure CMake with vcpkg toolchain
+      run: |
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake
+
+    - name: Build project and tests
+      run: |
+        cd build
+        make
+
+    - name: Run unit tests
+      run: |
+        cd build
+        ctest --output-on-failure
