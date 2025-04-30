@@ -7,30 +7,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      # Baixar o código do repositório
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install cmake g++ -y
+      # Instalar dependências necessárias
+      - name: Instalar dependências
+        run: |
+          sudo apt-get update
+          sudo apt-get install cmake g++ -y
 
-    - name: Set up vcpkg
-      run: |
-        ./vcpkg/bootstrap-vcpkg.sh
+      # Baixar e configurar o vcpkg
+      - name: Download and set up vcpkg
+        run: |
+          git clone https://github.com/microsoft/vcpkg.git
+          cd vcpkg
+          ./bootstrap-vcpkg.sh
+          ./vcpkg install gtest
+          cd ..
 
-    - name: Configure CMake with vcpkg toolchain
-      run: |
-        mkdir build
-        cd build
-        cmake .. -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake
+      # Configurar o CMake com o toolchain do vcpkg
+      - name: Configure CMake with vcpkg toolchain
+        run: |
+          mkdir build
+          cd build
+          cmake .. -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake
 
-    - name: Build project and tests
-      run: |
-        cd build
-        make
+      # Compilar o projeto e os testes
+      - name: Build project and tests
+        run: |
+          cd build
+          make
 
-    - name: Run unit tests
-      run: |
-        cd build
-        ctest --output-on-failure
+      # Executar os testes unitários
+      - name: Run unit tests
+        run: |
+          cd build
+          ctest --output-on-failure
