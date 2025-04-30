@@ -70,16 +70,15 @@ bool validate_cpf(const string &cpf_formatado) {
 }
 
 
-bool validate_name(const string &name_user, const string &last_name){
+bool validate_name(const string &name_user){
 
     /** 
-     * @brief valida o primeiro e ultimo nome do usuario.
+     * @brief valida o primeiro Nome 
      * 
      * @param name_usaer Primeiro nome.
-     * @param last_name Ultimo nome.
      * 
-     * @return retorna verdadeiro forem validos falso se 
-     * forem invalidos.
+     * @return retorna verdadeiro for validos falso se 
+     * for invalido.
      */
     
 
@@ -88,13 +87,27 @@ bool validate_name(const string &name_user, const string &last_name){
             return false;
         }
     }
+    return true;
+
+}
+bool validate_last_name(const string &last_name){
+
+    /** 
+     * @brief valida o Ultimo nome  
+     * 
+     * @param name_usaer Ultimo nome.
+     * 
+     * @return retorna verdadeiro for valido falso se 
+     * for invalido.
+     */
+    
     for(char c_lastName : last_name){
         if(!isalpha(c_lastName) && c_lastName != ' '){
             return false;
         }
     }
-    return true;
 
+    return true;
 }
 
 //TODO: refatorar a função para receber uma data no formato dd/mm/aaaa
@@ -153,10 +166,14 @@ bool validate_salary(const string &salary_user){
 int validate_user(const string &cpf_formatted, const string &first_name,
 const string &last_name, const string &age_user, const string &salary){
 
+    /*
+    */ 
+
     int error;
 
     if(!validate_cpf(cpf_formatted)) return error = 1; 
-    if(!validate_name(first_name,last_name))return error = 2;
+    if(!validate_name(first_name))return error = 2;
+    if(!validate_last_name(last_name)) return error = 2;
     if(!validate_age(age_user)) return error = 3;
     if(!validate_salary(salary))return error = 4;
     else return error = 0;
