@@ -19,7 +19,7 @@ void menu(){
     int response;
     string menssager;
     string fist_name,last_name,age,salary,cpf;
-
+    // TODO: Adicionar menu -> exibir as opções de menu na tela
     scanf("%c",&option);
     getchar();
     switch (option){
