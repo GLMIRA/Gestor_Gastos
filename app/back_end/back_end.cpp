@@ -7,6 +7,7 @@
 #include "constantes.hpp"
 
 //TODO: adicionar função pra validar ultimo nome.
+//TODO: adicionar lógica para pegar a data e hora atual para atribur ao Expenses.dataHora -> use <chrono> e <ctime>
 
 using namespace std;
 
