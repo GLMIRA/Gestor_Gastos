@@ -11,7 +11,7 @@ using namespace std;
 struct Expense{
     int id;
     bool typeExpense; // se é obrigatoria ou nao (sendo TRUE obrigatoria e FALSE nao obrigatoria) 
-    char nameExpense[50]; // nome exp: LUZ,AGUA,NET ->
+    char nameExpense[50]; // nome exp: LUZ,AGUA,NET 
     float amount = 0.0;// valor da conta 
     char dateTime[19];// recebe em formato:AAAA-MM-DD HH:MM:SS 
     char description[100]; // texto sobre o gasto, ou breve comentário -> Atributo opcional
@@ -21,7 +21,7 @@ struct Expense{
 struct ExtraSourceIncome{ // atributo opcional em user
     int id;
     string name; // nome da renda -> EX: Investimentos 
-    bool other_salary; // verificar se é salário de outro emprego, ou não -> TRUE se sim, FALSE se não
+    bool salary; // verificar se é salário de outro emprego, ou não -> TRUE se sim, FALSE se não
     float amount_monthly; // Quantidade de reais que essa renda traz mensalmente
 };
 
@@ -30,11 +30,11 @@ struct User{
     string name;
     string last_name; 
     char cpf[14];
-    int age = 0;
-    float salary = 0.0;
+    int age; // deve receber com base na DATA DE NASCIMENTO
     float total_amount; // montante da renda + salario
     Expense expense[NUM_MAX_EXPENSE];
     ExtraSourceIncome source[NUM_MAX_SOURCESOFINCOME];
+    int total_expenses = 0; // numero de gastos do usuário mensalmente
 };
 
 #endif

@@ -19,7 +19,7 @@ void menu(){
     int response;
     string menssager;
     string fist_name,last_name,age,salary,cpf;
-
+    // TODO: fazer tela de criação de usuário, revisar o menu 
     scanf("%c",&option);
     getchar();
     switch (option){
