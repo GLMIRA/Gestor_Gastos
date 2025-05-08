@@ -79,3 +79,4 @@ build/
 # Ignora a pasta de build do projeto
 gestor_gastos 
 Gestor_Gastos
+test_gestor_gastos
