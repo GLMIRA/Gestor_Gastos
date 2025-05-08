@@ -10,8 +10,6 @@
 // Modulos  
 #include "constantes.hpp"
 
-//TODO: adicionar lógica para pegar a data e hora atual para atribur ao Expenses.dataHora -> use <chrono> e <ctime>
-
 using namespace std;
 
 bool validate_cpf(const string &cpf_formatado) {
@@ -115,6 +113,14 @@ bool validate_last_name(const string &last_name){
 }
 
 time_t convert_string_date_to_time_t(const string &date) {
+    /** 
+    * @brief converte uma string data em time_tt(dd/mm/aaaa -> sec)
+    * 
+    * @param date:string dd/mm/aaaa
+    * 
+    * @return retorna a data em segundos
+    * 
+    */
     int day, month, year;
     char bar1, bar2;
 
@@ -137,6 +143,13 @@ time_t convert_string_date_to_time_t(const string &date) {
 }
 
 bool validate_string_in_format_date(const string &date){
+    /**
+     * @brief: valida se a string tem o formato de data esperado DD/MM/AAAA.
+     * 
+     * @param date: string com a data.
+     * 
+     * @return: verdadeiro se estiver no formato esperado falso se nao estiver.
+     */
 
     if (date.length() != 10) return false;
     for (int i = 0; i < 10; i++) {
@@ -146,10 +159,10 @@ bool validate_string_in_format_date(const string &date){
     return true;
 }
 
-bool validate_age(const string &birthdate){
+bool validate_birthdate(const string &birthdate){
 
     /** 
-     * @brief valida a idade do usuario.
+     * @brief valida a data de nacimento de um usuario .
      * 
      * @param birthdate idade do usuario.
      * 
@@ -217,7 +230,7 @@ const string &last_name, const string &birthdate, const string &salary){
     if(!validate_cpf(cpf_formatted)) return error = 1; 
     if(!validate_name(first_name))return error = 2;
     if(!validate_last_name(last_name)) return error = 2;
-    if(!validate_age(birthdate)) return error = 3;
+    if(!validate_birthdate(birthdate)) return error = 3;
     if(!validate_salary(salary))return error = 4;
     else return error = 0;
     
