@@ -36,7 +36,7 @@ add_executable(Gestor_Gastos ${SOURCES})
 set(TEST_SOURCES
     app/back_end/test/test_validate_cpf.cpp  # <- adicionado aqui
     app/back_end/test/test_validate_salary.cpp
-    app/back_end/test/test_validate_age.cpp
+    app/back_end/test/test_validate_birthdate.cpp
     app/back_end/test/test_validate_name.cpp
 )
 
