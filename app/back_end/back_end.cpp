@@ -1,13 +1,14 @@
-#include <iostream>
 #include <cstring>
 #include <cctype>
+#include <chrono>
+#include <ctime>
+#include <iostream>
 #include <string>
+#include <sstream>
+#include <exception>
 
 // Modulos  
 #include "constantes.hpp"
-
-//TODO: adicionar função pra validar ultimo nome.
-//TODO: adicionar lógica para pegar a data e hora atual para atribur ao Expenses.dataHora -> use <chrono> e <ctime>
 
 using namespace std;
 
@@ -111,27 +112,81 @@ bool validate_last_name(const string &last_name){
     return true;
 }
 
-//TODO: refatorar a função para receber uma data no formato dd/mm/aaaa
-bool validate_age(const string &age_user){
+time_t convert_string_date_to_time_t(const string &date) {
+    /** 
+    * @brief converte uma string data em time_tt(dd/mm/aaaa -> sec)
+    * 
+    * @param date:string dd/mm/aaaa
+    * 
+    * @return retorna a data em segundos
+    * 
+    */
+    int day, month, year;
+    char bar1, bar2;
+
+    stringstream ss(date);
+    ss >> day >> bar1 >> month >> bar2 >> year;
+
+    if (ss.fail() || bar1 != '/' || bar2 != '/' || 
+        day < 1 || day > 31 || month < 1 || month > 12 || year < 1900) {
+        return - 1;
+    }
+
+    tm tm_date = {};
+    tm_date.tm_mday = day;
+    tm_date.tm_mon = month - 1;     
+    tm_date.tm_year = year - 1900;  
+
+    time_t result_in_int = mktime(&tm_date);
+
+    return result_in_int; // valor em segundos desde 1/1/1970 (epoch Unix)
+}
+
+bool validate_string_in_format_date(const string &date){
+    /**
+     * @brief: valida se a string tem o formato de data esperado DD/MM/AAAA.
+     * 
+     * @param date: string com a data.
+     * 
+     * @return: verdadeiro se estiver no formato esperado falso se nao estiver.
+     */
+
+    if (date.length() != 10) return false;
+    for (int i = 0; i < 10; i++) {
+        if ((i == 2 || i == 5) && date[i] != '/') return false;
+        else if (i != 2 && i != 5 && !isdigit(date[i])) return false;
+    }
+    return true;
+}
+
+bool validate_birthdate(const string &birthdate){
 
     /** 
-     * @brief valida a idade do usuario.
+     * @brief valida a data de nacimento de um usuario .
      * 
-     * @param age_user idade do usuario.
+     * @param birthdate idade do usuario.
      * 
      * @return retorna verdadeiro for valido, falso se 
      * for invalido.
      */
      try
      {
-        int age = stoi(age_user);
-        if (age < 0){
-            return false;
-        } 
+        time_t now = time(nullptr);
+        tm* date = localtime(&now);
+        time_t date_today = mktime(date);
+        
+        if(!validate_string_in_format_date(birthdate)) return false;
 
+        time_t date_user = convert_string_date_to_time_t(birthdate);
+        if (date_user == -1) return false;
+
+
+        if((date_today - date_user) < MINIMUM_AGE_SECONDS) return false;
+        if(date_user >= date_today) return false;
         return true;
+
      }
-     catch(const std::exception& e)
+     catch(const exception& e)
      {
         return false;
      }
@@ -157,7 +212,7 @@ bool validate_salary(const string &salary_user){
         }
         return true;
     }
-    catch(const std::exception& e)
+    catch(const exception& e)
     {
         return false;
     }
@@ -165,7 +220,7 @@ bool validate_salary(const string &salary_user){
 
 }
 int validate_user(const string &cpf_formatted, const string &first_name,
-const string &last_name, const string &age_user, const string &salary){
+const string &last_name, const string &birthdate, const string &salary){
 
     /*
     */ 
@@ -175,7 +230,7 @@ const string &last_name, const string &age_user, const string &salary){
     if(!validate_cpf(cpf_formatted)) return error = 1; 
     if(!validate_name(first_name))return error = 2;
     if(!validate_last_name(last_name)) return error = 2;
-    if(!validate_age(age_user)) return error = 3;
+    if(!validate_birthdate(birthdate)) return error = 3;
     if(!validate_salary(salary))return error = 4;
     else return error = 0;
     
