@@ -37,7 +37,7 @@ Se tudo estiver certo, você verá a versão do CMake instalada.
 
 Agora que o CMake está instalado, você pode configurar o seu projeto para utilizar o CMake da seguinte maneira.
 
-### Criar o arquivo CMakeLists.txt
+### Criar o arquivo CMakeLists.txt(NESSE CASO ELE JA ESTA NO PROJETO)
 
 Crie o arquivo `CMakeLists.txt` na raiz do seu projeto.
 
@@ -69,9 +69,16 @@ add_executable(Gestor_Gastos ${SOURCES})
 
 ### Configuração do CMake no VSCode
 
+#### IMPORTANTE se não fizer não vai funcionar
+
 Se estiver utilizando o VSCode, configure o arquivo `settings.json` para apontar para o CMake. Aqui está um exemplo de como fazer isso:
 
 Vá até o diretório `.vscode` e edite o arquivo `settings.json`:
+
+se não existir esse diretorio crie ele na pasta raiz do seu projeto com o nome 
+`.vscode` IMPORTANTE tem que ter o ( . ) antes ok ???
+
+após isso crie um arquivo com o nome de `settings.json`
 
 ```json
 {
@@ -80,6 +87,34 @@ Vá até o diretório `.vscode` e edite o arquivo `settings.json`:
     "cmake.toolchainFile": "/home/seu_usuario/projeto/vcpkg/scripts/buildsystems/vcpkg.cmake"
 }
 ```
+
+### Crie tambem 
+
+crie um arquivo chamado `c_cpp_properties.json`
+```json
+{
+    "configurations": [
+      {
+        "name": "Linux",
+        "includePath": [
+          "${workspaceFolder}/app",
+          "${workspaceFolder}/app/dados",
+          "${workspaceFolder}/app/back_end",
+          "${workspaceFolder}/app/front_end",
+          "${workspaceFolder}/**"
+        ],
+        "defines": [],
+        "compilerPath": "/usr/bin/g++",     //| info do meu compilador edite para se adequar ao seu
+        "cStandard": "c11",                 //| info do meu compilador edite para se adequar ao seu
+        "cppStandard": "c++17",             //| info do meu compilador edite para se adequar ao seu
+        "intelliSenseMode": "linux-gcc-x64" //| info do meu compilador edite para se adequar ao seu
+      }
+    ],
+    "version": 4
+  }
+```
+
+
 
 ## 4. Gerar os Arquivos de Construção
 
