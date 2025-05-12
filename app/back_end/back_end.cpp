@@ -320,6 +320,17 @@ bool validate_name_expense(const string &name_expense){
 }
 
 bool validate_type_expense(const string &type_expense){
+    /**
+    * @brief Valida o tipo de despesa informado.
+    * 
+    * Esta função verifica se a string fornecida representa um tipo de despesa válido.
+    * O tipo de despesa deve ser representado por "S" (sim) ou "N" (não).
+    * 
+    * @param type_expense Uma string representando o tipo de despesa ("S" ou "N").
+    * 
+    * @return true se o tipo de despesa for válido ("S" ou "N").
+    * @return false se o tipo de despesa não for válido.
+    */
     string yes = "S";
     string no = "N";
     if(type_expense == yes){
