@@ -394,3 +394,5 @@ int validate_expense(const string &type_expense,const string &name_expense,
     error[3] = validate_date_time(date_time) ? 0 : 4;
 }
         
+
+        
