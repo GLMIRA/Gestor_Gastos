@@ -2,7 +2,7 @@
 
 #include<back_end.hpp>
 
-//TODO: REFATORAR OS TESTES, para que aceitem a função
+
 TEST(validateBirthdate, validAge){
     EXPECT_TRUE(validate_birthdate("10/12/2000"));
     EXPECT_TRUE(validate_birthdate("01/01/1901"));
