@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <vector>
 
 #include <unicode/unistr.h>
 #include <unicode/ustream.h>
@@ -234,20 +235,26 @@ bool validate_salary(const string &salary_user){
     
 
 }
-int validate_user(const string &cpf_formatted, const string &first_name,
-const string &last_name, const string &birthdate, const string &salary){
+void validate_user(const string &cpf_formatted, const string &first_name,
+const string &last_name, const string &birthdate, const string &salary, int ((&error)[4])){
 
-    /*
+    /** 
+    * @brief: função pra validar um usuario com base nas outras
+    * funçoes de validação seguindo uma tebala de erro 
+    * |1 -> erro de cpf           |
+    * |2 -> erro de primeiro nome | 
+    * |3 -> erro de sobrenome     |
+    * |4 -> erro de idade         |
+    * |0 -> SEM ERRO TUDO PASSOU  |
+    * @param: type all string: nome, sobrenome, cpf, idade
+    * 
+    * @return: altera os valores do vetor erro .
     */ 
 
-    int error;
-
-    if(!validate_cpf(cpf_formatted)) return error = 1; 
-    if(!validate_first_name(first_name))return error = 2;
-    if(!validate_last_name(last_name)) return error = 2;
-    if(!validate_birthdate(birthdate)) return error = 3;
-    if(!validate_salary(salary))return error = 4;
-    else return error = 0;
-    
+    // Validação e atribuição dos códigos de erro
+    error[0] = validate_cpf(cpf_formatted) ? 0 : 1;
+    error[1] = validate_first_name(first_name) ? 0 : 2;
+    error[2] = validate_last_name(last_name) ? 0 : 3;
+    error[3] = validate_birthdate(birthdate) ? 0 : 4;
 }
 
