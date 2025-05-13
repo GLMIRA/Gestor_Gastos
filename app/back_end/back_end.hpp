@@ -12,6 +12,6 @@ bool validate_cpf(const string &cpf_formatado);
 bool validate_first_name(const string &name_user);
 bool validate_last_name(const string &last_name);
 bool validate_birthdate(const string &age_user);
-bool validate_salary(const string &salary_user);
+bool validate_money_qtd(const string &salary_user);
 
 #endif

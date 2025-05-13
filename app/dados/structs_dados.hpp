@@ -13,7 +13,7 @@ struct Expense{
     bool typeExpense; // se é obrigatoria ou nao (sendo TRUE obrigatoria e FALSE nao obrigatoria) 
     string nameExpense; // nome exp: LUZ,AGUA,NET 
     float amount = 0.0;// valor da gasto
-    char dateTime[19];// recebe em formato:AAAA-MM-DD HH:MM:SS
+    char dateTime[19];// recebe em formato:DD-MM-AAAA:HH:MM:SS
     string description; // texto sobre o gasto, ou breve comentário -> Atributo opcional
 };
 
