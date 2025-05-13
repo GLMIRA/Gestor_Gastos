@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <vector>
+#include<vector>
 
 #include <unicode/unistr.h>
 #include <unicode/ustream.h>
@@ -128,6 +128,7 @@ bool validate_string_in_format_date_time(const string &date_time){
     }
     return true;
 }
+
 /*------------------------------Validate User------------------------------*/
 bool validate_cpf(const string &cpf_formatado) {
     /**
@@ -270,7 +271,7 @@ bool validate_birthdate(const string &birthdate){
 }
 
 void validate_user(const string &cpf_formatted, const string &first_name,
-const string &last_name, const string &birthdate, const string &salary, int ((&error)[4])){
+const string &last_name, const string &birthdate, int ((&error)[4])){
 
     /** 
     * @brief: função pra validar um usuario com base nas outras
@@ -291,7 +292,6 @@ const string &last_name, const string &birthdate, const string &salary, int ((&e
     error[2] = validate_last_name(last_name) ? 0 : 3;
     error[3] = validate_birthdate(birthdate) ? 0 : 4;
 }
-
 /*------------------------------Validate Expense------------------------------*/
 bool validate_name_expense(const string &name_expense){
     
@@ -371,9 +371,8 @@ bool validate_date_time(const string &date_time){
     return false;
 
 }
-
-int validate_expense(const string &type_expense,const string &name_expense,
-    const string &amount, const string &date_time, int((error)[4])){
+void validate_expense(const string &type_expense,const string &name_expense,
+    const string &amount, const string &date_time, int((&error)[4])){
             /** 
     * @brief: função pra validar um gasto com base nas outras
     * funçoes de validação seguindo uma tebala de erro 
@@ -393,6 +392,3 @@ int validate_expense(const string &type_expense,const string &name_expense,
     error[2] = validate_money_qtd(amount) ? 0 : 3;
     error[3] = validate_date_time(date_time) ? 0 : 4;
 }
-        
-
-        
