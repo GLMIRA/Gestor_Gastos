@@ -128,13 +128,8 @@ bool validate_string_in_format_date_time(const string &date_time){
     }
     return true;
 }
-<<<<<<< HEAD
 
 /*------------------------------Validate User------------------------------*/
-
-=======
-/*------------------------------Validate User------------------------------*/
->>>>>>> developer
 bool validate_cpf(const string &cpf_formatado) {
     /**
      * @brief recebe uma variavel com um cpf e verifica se é valido
@@ -297,12 +292,7 @@ const string &last_name, const string &birthdate, int ((&error)[4])){
     error[2] = validate_last_name(last_name) ? 0 : 3;
     error[3] = validate_birthdate(birthdate) ? 0 : 4;
 }
-
 /*------------------------------Validate Expense------------------------------*/
-<<<<<<< HEAD
-
-=======
->>>>>>> developer
 bool validate_name_expense(const string &name_expense){
     
     /** 
@@ -381,12 +371,7 @@ bool validate_date_time(const string &date_time){
     return false;
 
 }
-
-<<<<<<< HEAD
-int validate_expense(const string &type_expense,const string &name_expense,
-=======
 void validate_expense(const string &type_expense,const string &name_expense,
->>>>>>> developer
     const string &amount, const string &date_time, int((&error)[4])){
             /** 
     * @brief: função pra validar um gasto com base nas outras
@@ -407,8 +392,3 @@ void validate_expense(const string &type_expense,const string &name_expense,
     error[2] = validate_money_qtd(amount) ? 0 : 3;
     error[3] = validate_date_time(date_time) ? 0 : 4;
 }
-        
-<<<<<<< HEAD
-=======
-
->>>>>>> developer
