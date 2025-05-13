@@ -2,15 +2,22 @@
 #include <cctype>
 #include <chrono>
 #include <ctime>
+#include <exception>
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <exception>
+#include <vector>
+
+#include <unicode/unistr.h>
+#include <unicode/ustream.h>
+#include <unicode/uchar.h>
 
 // Modulos  
 #include "constantes.hpp"
 
+
 using namespace std;
+using namespace icu;
 
 bool validate_cpf(const string &cpf_formatado) {
     /**
@@ -72,26 +79,33 @@ bool validate_cpf(const string &cpf_formatado) {
 }
 
 
-bool validate_name(const string &name_user){
+bool validate_first_name(const string &name_user){
 
     /** 
      * @brief valida o primeiro Nome 
      * 
-     * @param name_usaer Primeiro nome.
+     * @param name_user Primeiro nome.
      * 
      * @return retorna verdadeiro for validos falso se 
      * for invalido.
      */
     
+    // Converte a string para Unicode (UTF-8)
+    UnicodeString uName(name_user.c_str(), "UTF-8");
 
-    for(char c_name : name_user){
-        if(!isalpha(c_name) && c_name != ' '){
-            return false;
+    // Verifica se o nome não contém caracteres inválidos
+    for (int i = 0; i < uName.length(); ++i) {
+        UChar32 c = uName.char32At(i);
+        if (!u_isalpha(c) && c != ' ') {
+            return false; // Retorna falso se o caractere não for alfabético ou espaço
         }
     }
-    return true;
 
+    // Se o nome estiver vazio ou for composto apenas por espaços, retorna falso
+    return !name_user.empty() && name_user.find_first_not_of(' ') != string::npos;
 }
+
+
 bool validate_last_name(const string &last_name){
 
     /** 
@@ -102,14 +116,16 @@ bool validate_last_name(const string &last_name){
      * @return retorna verdadeiro for valido falso se 
      * for invalido.
      */
-    
-    for(char c_lastName : last_name){
-        if(!isalpha(c_lastName) && c_lastName != ' '){
-            return false;
+    UnicodeString uName(last_name.c_str(), "UTF-8");
+    for (int i = 0; i < uName.length(); ++i) {
+        UChar32 c = uName.char32At(i);
+        if (!u_isalpha(c) && c != ' '){
+            return false; // Retorna falso se o caractere não for alfabético ou espaço
         }
     }
 
-    return true;
+    // Se o nome estiver vazio ou for composto apenas por espaços, retorna falso
+    return !last_name.empty() && last_name.find_first_not_of(' ') != string::npos;
 }
 
 time_t convert_string_date_to_time_t(const string &date) {
@@ -219,21 +235,26 @@ bool validate_salary(const string &salary_user){
     
 
 }
-int validate_user(const string &cpf_formatted, const string &first_name,
-const string &last_name, const string &birthdate, const string &salary){
+void validate_user(const string &cpf_formatted, const string &first_name,
+const string &last_name, const string &birthdate, const string &salary, int ((&error)[4])){
 
-    /*
+    /** 
+    * @brief: função pra validar um usuario com base nas outras
+    * funçoes de validação seguindo uma tebala de erro 
+    * |1 -> erro de cpf           |
+    * |2 -> erro de primeiro nome | 
+    * |3 -> erro de sobrenome     |
+    * |4 -> erro de idade         |
+    * |0 -> SEM ERRO TUDO PASSOU  |
+    * @param: type all string: nome, sobrenome, cpf, idade
+    * 
+    * @return: altera os valores do vetor erro .
     */ 
 
-    int error;
-
-//TODO mira gostaria que fizese um codgio que possa retornar mais de um problem ex: erro de cpf e nome: "12" erro de idade e cpf: "13"
-    if(!validate_cpf(cpf_formatted)) return error = 1; 
-    if(!validate_name(first_name))return error = 2;
-    if(!validate_last_name(last_name)) return error = 2;
-    if(!validate_birthdate(birthdate)) return error = 3;
-    if(!validate_salary(salary))return error = 4;
-    else return error = 0;
-    
+    // Validação e atribuição dos códigos de erro
+    error[0] = validate_cpf(cpf_formatted) ? 0 : 1;
+    error[1] = validate_first_name(first_name) ? 0 : 2;
+    error[2] = validate_last_name(last_name) ? 0 : 3;
+    error[3] = validate_birthdate(birthdate) ? 0 : 4;
 }
 
