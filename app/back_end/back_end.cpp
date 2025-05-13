@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <vector>
+#include<vector>
 
 #include <unicode/unistr.h>
 #include <unicode/ustream.h>
@@ -128,9 +128,13 @@ bool validate_string_in_format_date_time(const string &date_time){
     }
     return true;
 }
+<<<<<<< HEAD
 
 /*------------------------------Validate User------------------------------*/
 
+=======
+/*------------------------------Validate User------------------------------*/
+>>>>>>> developer
 bool validate_cpf(const string &cpf_formatado) {
     /**
      * @brief recebe uma variavel com um cpf e verifica se é valido
@@ -295,7 +299,10 @@ const string &last_name, const string &birthdate, int ((&error)[4])){
 }
 
 /*------------------------------Validate Expense------------------------------*/
+<<<<<<< HEAD
 
+=======
+>>>>>>> developer
 bool validate_name_expense(const string &name_expense){
     
     /** 
@@ -375,7 +382,11 @@ bool validate_date_time(const string &date_time){
 
 }
 
+<<<<<<< HEAD
 int validate_expense(const string &type_expense,const string &name_expense,
+=======
+void validate_expense(const string &type_expense,const string &name_expense,
+>>>>>>> developer
     const string &amount, const string &date_time, int((&error)[4])){
             /** 
     * @brief: função pra validar um gasto com base nas outras
@@ -397,3 +408,7 @@ int validate_expense(const string &type_expense,const string &name_expense,
     error[3] = validate_date_time(date_time) ? 0 : 4;
 }
         
+<<<<<<< HEAD
+=======
+
+>>>>>>> developer
