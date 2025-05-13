@@ -129,6 +129,55 @@ bool validate_string_in_format_date_time(const string &date_time){
     return true;
 }
 
+bool validate_string_type_name(const string &string_name){
+    
+    /** 
+     * @brief valida se a string esta certa para aceitar um nome 
+     * 
+     * @param string_name Primeiro nome.
+     * 
+     * @return retorna verdadeiro for validos falso se 
+     * for invalido.
+     */
+    
+    // Converte a string para Unicode (UTF-8)
+    UnicodeString uName(string_name.c_str(), "UTF-8");
+
+    // Verifica se o nome não contém caracteres inválidos
+    for (int i = 0; i < uName.length(); ++i) {
+        UChar32 c = uName.char32At(i);
+        if (!u_isalpha(c) && c != ' ') {
+            return false; // Retorna falso se o caractere não for alfabético ou espaço
+        }
+    }
+
+    // Se o nome estiver vazio ou for composto apenas por espaços, retorna falso
+    return !string_name.empty() && string_name.find_first_not_of(' ') != string::npos;
+}
+
+bool validate_type(const string &type){
+    /**
+    * @brief Valida o tipo de despesa informado.
+    * 
+    * Esta função verifica se a string fornecida representa um tipo válido.
+    * O tipo de despesa deve ser representado por "S" (sim) ou "N" (não).
+    * 
+    * @param type Uma string representando o tipo de despesa ("S" ou "N").
+    * 
+    * @return true se o tipo for válido ("S" ou "N").
+    * @return false se o tipo não for válido.
+    */
+    string yes = "S";
+    string no = "N";
+    if(type == yes){
+        return true;
+    }
+    else if(type == no){
+        return true;
+    }
+    return false;
+}
+
 /*------------------------------Validate User------------------------------*/
 bool validate_cpf(const string &cpf_formatado) {
     /**
@@ -189,53 +238,6 @@ bool validate_cpf(const string &cpf_formatado) {
     return true; // CPF válido
 }
 
-bool validate_first_name(const string &name_user){
-
-    /** 
-     * @brief valida o primeiro Nome 
-     * 
-     * @param name_user Primeiro nome.
-     * 
-     * @return retorna verdadeiro for validos falso se 
-     * for invalido.
-     */
-    
-    // Converte a string para Unicode (UTF-8)
-    UnicodeString uName(name_user.c_str(), "UTF-8");
-
-    // Verifica se o nome não contém caracteres inválidos
-    for (int i = 0; i < uName.length(); ++i) {
-        UChar32 c = uName.char32At(i);
-        if (!u_isalpha(c) && c != ' ') {
-            return false; // Retorna falso se o caractere não for alfabético ou espaço
-        }
-    }
-
-    // Se o nome estiver vazio ou for composto apenas por espaços, retorna falso
-    return !name_user.empty() && name_user.find_first_not_of(' ') != string::npos;
-}
-
-bool validate_last_name(const string &last_name){
-
-    /** 
-     * @brief valida o Ultimo nome  
-     * 
-     * @param name_usaer Ultimo nome.
-     * 
-     * @return retorna verdadeiro for valido falso se 
-     * for invalido.
-     */
-    UnicodeString uName(last_name.c_str(), "UTF-8");
-    for (int i = 0; i < uName.length(); ++i) {
-        UChar32 c = uName.char32At(i);
-        if (!u_isalpha(c) && c != ' '){
-            return false; 
-        }
-    }
-
-    return !last_name.empty() && last_name.find_first_not_of(' ') != string::npos;
-}
-
 bool validate_birthdate(const string &birthdate){
 
     /** 
@@ -288,59 +290,11 @@ const string &last_name, const string &birthdate, int ((&error)[4])){
 
     // Validação e atribuição dos códigos de erro
     error[0] = validate_cpf(cpf_formatted) ? 0 : 1;
-    error[1] = validate_first_name(first_name) ? 0 : 2;
-    error[2] = validate_last_name(last_name) ? 0 : 3;
+    error[1] = validate_string_type_name(first_name) ? 0 : 2;
+    error[2] = validate_string_type_name(last_name) ? 0 : 3;
     error[3] = validate_birthdate(birthdate) ? 0 : 4;
 }
 /*------------------------------Validate Expense------------------------------*/
-bool validate_name_expense(const string &name_expense){
-    
-    /** 
-     * @brief valida o Nome do gasto 
-     * 
-     * @param name_expense Primeiro nome.
-     * 
-     * @return retorna verdadeiro for validos falso se 
-     * for invalido.
-     */
-    
-    // Converte a string para Unicode (UTF-8)
-    UnicodeString uName(name_expense.c_str(), "UTF-8");
-
-    // Verifica se o nome não contém caracteres inválidos
-    for (int i = 0; i < uName.length(); ++i) {
-        UChar32 c = uName.char32At(i);
-        if (!u_isalpha(c) && c != ' ') {
-            return false; // Retorna falso se o caractere não for alfabético ou espaço
-        }
-    }
-
-    // Se o nome estiver vazio ou for composto apenas por espaços, retorna falso
-    return !name_expense.empty() && name_expense.find_first_not_of(' ') != string::npos;
-}
-
-bool validate_type_expense(const string &type_expense){
-    /**
-    * @brief Valida o tipo de despesa informado.
-    * 
-    * Esta função verifica se a string fornecida representa um tipo de despesa válido.
-    * O tipo de despesa deve ser representado por "S" (sim) ou "N" (não).
-    * 
-    * @param type_expense Uma string representando o tipo de despesa ("S" ou "N").
-    * 
-    * @return true se o tipo de despesa for válido ("S" ou "N").
-    * @return false se o tipo de despesa não for válido.
-    */
-    string yes = "S";
-    string no = "N";
-    if(type_expense == yes){
-        return true;
-    }
-    else if(type_expense == no){
-        return true;
-    }
-    return false;
-}
 
 bool validate_date_time(const string &date_time){
     /**
@@ -371,6 +325,7 @@ bool validate_date_time(const string &date_time){
     return false;
 
 }
+
 void validate_expense(const string &type_expense,const string &name_expense,
     const string &amount, const string &date_time, int((&error)[4])){
             /** 
@@ -381,14 +336,34 @@ void validate_expense(const string &type_expense,const string &name_expense,
     * |3 -> valor errado          |
     * |4 -> erro de data          |
     * |0 -> SEM ERRO TUDO PASSOU  |
-    * @param: type all string: nome, sobrenome, cpf, idade
+    * @param: type all string: nome, tipo, amont, data
     * 
     * @return: altera os valores do vetor erro .
     */ 
 
     // Validação e atribuição dos códigos de erro
-    error[0] = validate_name_expense(name_expense)? 0 : 1;
-    error[1] = validate_type_expense(type_expense) ? 0 : 2;
+    error[0] = validate_string_type_name(name_expense)? 0 : 1;
+    error[1] = validate_type(type_expense) ? 0 : 2;
     error[2] = validate_money_qtd(amount) ? 0 : 3;
     error[3] = validate_date_time(date_time) ? 0 : 4;
 }
+
+/*------------------------------Source Income------------------------------*/
+
+void validate_source_icome(const string name_income, const string type_income,
+    const string amount_monthly, int((&error)[4])){
+    /** 
+    * @brief: função pra validar uma renda com base nas outras
+    * funçoes de validação seguindo uma tebala de erro 
+    * |1 -> erro de nome          |
+    * |2 -> erro do tipo          | 
+    * |3 -> valor errado          |   
+    * |0 -> SEM ERRO TUDO PASSOU  |
+    * @param: type all string: nome, tipo, dinheiro
+    * 
+    * @return: altera os valores do vetor erro .
+    */    
+    error[0] = validate_string_type_name(name_income)? 0 : 1;
+    error[1] = validate_type(type_income) ? 0 : 2;
+    error[2] = validate_money_qtd(amount_monthly) ? 0 : 3;
+    }
