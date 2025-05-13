@@ -227,6 +227,7 @@ const string &last_name, const string &birthdate, const string &salary){
 
     int error;
 
+//TODO mira gostaria que fizese um codgio que possa retornar mais de um problem ex: erro de cpf e nome: "12" erro de idade e cpf: "13"
     if(!validate_cpf(cpf_formatted)) return error = 1; 
     if(!validate_name(first_name))return error = 2;
     if(!validate_last_name(last_name)) return error = 2;
