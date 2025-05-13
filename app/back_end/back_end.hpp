@@ -5,6 +5,7 @@
 
 using namespace std;
 
+
 void validate_user(const string &cpf_formatted, const string &first_name,
     const string &last_name, const string &age_user, int ((&error)[4]));
 bool validate_cpf(const string &cpf_formatado);
