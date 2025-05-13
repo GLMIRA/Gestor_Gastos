@@ -20,7 +20,7 @@ struct Expense{
 struct SourceIncome{ // atributo opcional em user
     int id; // PK
     string name; // nome da renda -> EX: Investimentos 
-    bool type_income; // verificar se é salário de outro emprego, ou não -> TRUE se sim, FALSE se não
+    bool type_income; // verificar se é salário o outra renda, ou não -> TRUE se sim, FALSE se não
     float amount_monthly; // Quantidade de reais que essa renda traz no mes
     string description; // breve comentário -> Atributo opcional
 };
