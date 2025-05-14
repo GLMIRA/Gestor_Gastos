@@ -10,28 +10,32 @@
 using namespace std;
 
 //Codigo
-void valuete_entry(string *variebles[],string mensager[],string mensager_erro[],int cont,bool fist_exe){
-    getchar();
+void valuete_entry(string *variebles[],string mensager[],string mensager_erro[],
+    int index,bool fist_exe){
+    
     if(fist_exe==true){
-        for(int i = 0 ;i < cont; i ++){
+        for(int i = 0; i < index; i++){
             cout << mensager[i]; 
             getline(cin,*variebles[i]);
 
         }
     }else{
-        cout << mensager_erro[cont] << "\n";
-        cout << mensager[cont];
-        getline(cin,*variebles[cont]);
+        cout << mensager_erro[index] << "\n";
+        cout << mensager[index];
+        getline(cin,*variebles[index]);
     }
 }
 
 void menu(){
-    int cont=0;
+    int array_range=0;
     int test_user=0;
     bool fist_exe=true;
     int error[4]={0,0,0,0};
     char choice;
-    string cpf,fist_name,last_name,brithdate;
+    string cpf = "";
+    string first_name ="";
+    string last_name="";
+    string brithdate="";
     string response[4];
     string mensager_erro[4]={
         "Erro: Digite o CPF No formato xxx.xxx.xxx-xx ",
@@ -47,7 +51,7 @@ void menu(){
         };
     string *variebles[4]={
         &cpf,
-        &fist_name,
+        &first_name,
         &last_name,
         &brithdate
     };
@@ -57,49 +61,42 @@ void menu(){
     cout << "\n\t └────────────────────────────────┘";
     cout << "\n\t ┌────────────────────────────────┐"; 
     cout << "\n\t │Digite:                         │";
-    cout << "\n\t |       c para criar a conta     |";
-    cout << "\n\t │       l para entrar na conta   │";     
-    cout << "\n\t │       s para sair              │";             
+    cout << "\n\t |c para criar a conta            |";
+    cout << "\n\t │l para entrar na conta          │";     
+    cout << "\n\t │s para sair                     │";             
     cout << "\n\t └────────────────────────────────┘\n"; 
     cin >> choice;
-        switch (choice)
-        {
+    cin.ignore();
+
+        switch (choice){
         case 'c':
         case 'C':
             cout << "\n\t ┌────────────────────────────────┐";
             cout << "\n\t │  Agora vamos criar um usuario! │";
             cout << "\n\t └────────────────────────────────┘\n";
-            valuete_entry(variebles, mensager,mensager_erro,cont=4,fist_exe);
 
-            validate_user(cpf,fist_name,last_name,brithdate,error);
+            array_range = 4;
+            valuete_entry(variebles, mensager,mensager_erro,array_range,fist_exe);
 
-            while (true)
-            {
+            while (true){
+                
                 test_user = 0;
-                if(test_user==4){
-                    cout << "Usuario cadastrado com sucesso!";
-                    break;
-                }else{
-                    validate_user(cpf,fist_name,last_name,brithdate,error);
-                }
+                validate_user(cpf,first_name,last_name,brithdate,error);
+
                 for(int j=0;j<4;j++){
                     fist_exe=false;
                     if(error[j] != 0){
-                        cont = j;
-                        valuete_entry(variebles,mensager,mensager_erro,cont,fist_exe);
+                        valuete_entry(variebles,mensager,mensager_erro,j,fist_exe);
                     }else{
                         test_user++;
                     }  
                 }
-                 if(test_user==4){
+                if(test_user==4){
                     cout << "Usuario cadastrado com sucesso!\n";
+                    fist_exe = true;
                     break;
-                }else{
-                    validate_user(cpf,fist_name,last_name,brithdate,error);
                 }
             };
-
-
         break;
 
         case 'l':
@@ -107,7 +104,10 @@ void menu(){
 
 
         break;
-        
+        case 's':
+        case 'S':
+            cout<< "Saindo"<<"\n";
+        break;
         default:
         cout << "valor errado!";
             break;
