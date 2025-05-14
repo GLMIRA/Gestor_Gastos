@@ -1,28 +1,41 @@
 #ifndef ESTRUTURA_DADOS_HPP
 #define ESTURUTRA_DADOS_HPP
 
-
 #include <string>
-
+#include <ctime>
+#include <chrono>
 #include "constantes.hpp"
 
 using namespace std;
+
 struct Expense{
     int id;
     bool typeExpense; // se é obrigatoria ou nao (sendo TRUE obrigatoria e FALSE nao obrigatoria) 
-    char nameExpense[50]; // nome exp: LUZ,AGUA,NET
-    float amount = 0.0;// valor da conta 
-    
+    string nameExpense; // nome exp: LUZ,AGUA,NET 
+    float amount = 0.0;// valor da gasto
+    char dateTime[19];// recebe em formato:DD-MM-AAAA:HH:MM:SS
+    string description; // texto sobre o gasto, ou breve comentário -> Atributo opcional
+};
+
+struct SourceIncome{ // atributo opcional em user
+    int id; // PK
+    string name; // nome da renda -> EX: Investimentos 
+    bool type_income; // verificar se é salário o outra renda, ou não -> TRUE se sim, FALSE se não
+    float amount_monthly; // Quantidade de reais que essa renda traz no mes
+    string description; // breve comentário -> Atributo opcional
 };
 
 struct User{
-    int id;
+    int id; // PK
     string name;
-    string last_name;
+    string last_name; 
+    float total_amount; // montante da renda + salario mensalmente
     char cpf[14];
-    int age = 0;
-    float salary = 0.0;
-    Expense expense[NUM_MAX_EXPENSE];
+    char birth_date[10]; // data de nascimento -> DD-MM-AAAA
+    int total_expenses = 0; // numero de gastos do usuário mensalmente -> incrementado  
+    float total_amount_expenses; // deve ser a soma de todos os expense.amount
+    Expense expense[NUM_MAX_EXPENSE]; // outra table
+    SourceIncome source[NUM_MAX_SOURCESOFINCOME]; // idem
 };
-
+//TODO: Fazer workbench
 #endif

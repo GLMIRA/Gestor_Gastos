@@ -6,92 +6,112 @@
 
 //Modulos
 #include  "back_end/back_end.hpp"
-#include "dados/structs_dados.hpp"
 #include "constantes.hpp"
-
 using namespace std;
 
-//Codigo☺
-void menu(){
+//Codigo
+void valuete_entry(string *variebles[],string mensager[],string mensager_erro[],
+    int index,bool fist_exe){
+    
+    if(fist_exe==true){
+        for(int i = 0; i < index; i++){
+            cout << mensager[i]; 
+            getline(cin,*variebles[i]);
 
-    // Variaveis
-    char option;
-    int response;
-    string menssager;
-    string fist_name,last_name,age,salary,cpf;
-
-    scanf("%c",&option);
-    getchar();
-    switch (option){
-
-    case 'c':
-    case 'C':
-
-        cout << "\nBem Vindo!\n";
-
-        //Aqui sera o lugar onde o Usuario ira digitar as suas informações
-
-        cout <<"Digite o CPF: ";
-        getline(cin,cpf);
-
-        cout <<"Digite o Primeiro Nome: ";
-        getline(cin,fist_name);
-
-        cout <<"Digite o Sobrenome: ";
-        getline(cin,last_name);
-
-        /*TODO: mudança de planos, o usuario n pode ter menos que 14 anos e vai inserir a data
-        nascimento no formato dd/mm/aaaa(back-end espera receber dessa forma blzz ??)
-        vou retornar dois possiveis erros 
-        data_nacimento invalida ou usuario com idadde menor que a permitida blzz??
-        */
-        cout <<"Digite a Idade: ";
-        getline(cin,age);
-
-        cout <<"Digite o Salario: ";
-        getline(cin,salary);
-
-        //codigo que envia as informações do usuario para a funcao validate_user
-        response = validate_user(cpf,fist_name,last_name,age,salary);
-
-
-        switch (response)
-        {
-        case 1:
-            menssager = "CPF invalido ou fora do padrao xxx.xxx.xxx-xx";
-        break;
-
-        case 2:
-            menssager = "Nome tem numeros ou caracteres especiais";
-        break;
-
-        case 3:
-            menssager = "Idade tem letras o caracteres especiais ";
-        break;
-
-        case 4:
-            menssager = "Salario tem letras, caracteres especiais ou nao esta no formato 0000,00";
-        break;
         }
-
-        if(response>0){
-            cout << "\n!ERRO: " <<menssager << " !\n";
-        }else{
-            cout << "\n Usuario Criado com Sucesso!\n";
-        }
-        
-    break;
-
-    case 'l':
-    case 'L':
-
-    break;
-
-        
-
-    default:
-    printf("\n|**************|\n| Wrong value! |\n**************\n");   
-    break;
+    }else{
+        cout << mensager_erro[index] << "\n";
+        cout << mensager[index];
+        getline(cin,*variebles[index]);
     }
+}
 
+void menu(){
+    int array_range=0;
+    int test_user=0;
+    bool fist_exe=true;
+    int error[4]={0,0,0,0};
+    char choice;
+    string cpf = "";
+    string first_name ="";
+    string last_name="";
+    string brithdate="";
+    string response[4];
+    string mensager_erro[4]={
+        "Erro: Digite o CPF No formato xxx.xxx.xxx-xx ",
+        "Erro: Nome tem numeros ou caracteres especiais ",
+        "Erro: Sobrenome tem numeros ou caracteres especiais ",
+        "Erro: Idade tem letras o caracteres especiais ",
+    };
+    string mensager[4] = {
+        "Digite o CPF, no formato xxx.xxx.xxx-xx: ",
+        "Digite o Primeiro Nome: ",
+        "Digite o Sobrenome: ",
+        "Digite a sua Idade, no formato dia/mes/ano: ",
+        };
+    string *variebles[4]={
+        &cpf,
+        &first_name,
+        &last_name,
+        &brithdate
+    };
+    do{
+    cout << "\n\t ┌────────────────────────────────┐";
+    cout << "\n\t │ Bem Vindo ao Gestor de Gastos! │";
+    cout << "\n\t └────────────────────────────────┘";
+    cout << "\n\t ┌────────────────────────────────┐"; 
+    cout << "\n\t │Digite:                         │";
+    cout << "\n\t |c para criar a conta            |";
+    cout << "\n\t │l para entrar na conta          │";     
+    cout << "\n\t │s para sair                     │";             
+    cout << "\n\t └────────────────────────────────┘\n"; 
+    cin >> choice;
+    cin.ignore();
+
+        switch (choice){
+        case 'c':
+        case 'C':
+            cout << "\n\t ┌────────────────────────────────┐";
+            cout << "\n\t │  Agora vamos criar um usuario! │";
+            cout << "\n\t └────────────────────────────────┘\n";
+
+            array_range = 4;
+            valuete_entry(variebles, mensager,mensager_erro,array_range,fist_exe);
+
+            while (true){
+                
+                test_user = 0;
+                validate_user(cpf,first_name,last_name,brithdate,error);
+
+                for(int j=0;j<4;j++){
+                    fist_exe=false;
+                    if(error[j] != 0){
+                        valuete_entry(variebles,mensager,mensager_erro,j,fist_exe);
+                    }else{
+                        test_user++;
+                    }  
+                }
+                if(test_user==4){
+                    cout << "Usuario cadastrado com sucesso!\n";
+                    fist_exe = true;
+                    break;
+                }
+            };
+        break;
+
+        case 'l':
+        case 'L':
+
+
+        break;
+        case 's':
+        case 'S':
+            cout<< "Saindo"<<"\n";
+        break;
+        default:
+        cout << "valor errado!";
+            break;
+        } 
+    }while (choice!='s' && choice!='S');
+        
 }
