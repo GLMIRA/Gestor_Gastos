@@ -6,6 +6,18 @@
 using namespace std;
 
 /*-----------------------validate user-----------------------*/
+/** 
+* @brief: função pra validar um usuario com base nas outras
+* funçoes de validação seguindo uma tebala de erro 
+* |1 -> erro de cpf           |
+* |2 -> erro de primeiro nome | 
+* |3 -> erro de sobrenome     |
+* |4 -> erro de idade         |
+* |0 -> SEM ERRO TUDO PASSOU  |
+* @param: type all string: nome, sobrenome, cpf, idade
+* 
+* @return: altera os valores do vetor erro .
+*/ 
 void validate_user(const string &cpf_formatted, const string &first_name,
     const string &last_name, const string &age_user, int ((&error)[4]));
 /*-----------------------validate expense-----------------------*/
