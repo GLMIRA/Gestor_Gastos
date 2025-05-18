@@ -163,13 +163,16 @@ bool validate_string_type_name(const string &string_name){
 /// @return: true se válido, false se inválid
 bool validate_type(const string &type){
     
-    string yes = "S";
-    string no = "N";
-    if(type == yes){
+    string yes[2]{"s","S"};
+    string no[2] ={ "n","N"};
+
+    for(int i = 0; i<2; i++){
+        if(type == yes[i]){
+            return true;
+        }
+        else if(type == no[i]){
         return true;
-    }
-    else if(type == no){
-        return true;
+        }
     }
     return false;
 }
@@ -327,7 +330,7 @@ bool validate_date_time(const string &date_time){
 * @param: type all string: nome, tipo, amont, data
 * @return: altera os valores do vetor erro .
 */ 
-void validate_expense(const string &type_expense,const string &name_expense,
+void validate_expense(const string &name_expense,const string &type_expense,
     const string &amount, const string &date_time, int((&error)[4])){
 
     // Validação e atribuição dos códigos de erro
@@ -357,3 +360,7 @@ void validate_source_icome(const string name_income, const string type_income,
     error[1] = validate_type(type_income) ? 0 : 2;
     error[2] = validate_money_qtd(amount_monthly) ? 0 : 3;
     }
+/*------------------------------------------------------------------------------*/
+/*--------------------- functions to change type variables ---------------------*/
+/*------------------------------------------------------------------------------*/
+
