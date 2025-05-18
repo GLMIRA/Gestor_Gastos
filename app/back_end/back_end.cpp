@@ -353,7 +353,7 @@ void validate_expense(const string &name_expense,const string &type_expense,
 * 
 * @return: altera os valores do vetor erro .
 */   
-void validate_source_icome(const string name_income, const string type_income,
+void validate_source_income(const string name_income, const string type_income,
     const string amount_monthly, int((&error)[4])){
  
     error[0] = validate_string_type_name(name_income)? 0 : 1;

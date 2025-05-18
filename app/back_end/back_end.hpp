@@ -24,7 +24,7 @@ void validate_user(const string &cpf_formatted, const string &first_name,
 void validate_expense(const string &type_expense,const string &name_expense,
     const string &amount, const string &date_time, int((&error)[4]));
 /*-----------------------validate income-----------------------*/
-void validate_source_icome(const string name_income, const string type_income,
+void validate_source_income(const string name_income, const string type_income,
     const string amount_monthly, int((&error)[4]));
 /*-----------------------funcutions to test-----------------------*/
 bool validate_date_time(const string &date_time);
