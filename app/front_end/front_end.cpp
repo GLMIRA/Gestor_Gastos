@@ -2,13 +2,27 @@
 #include <iostream>
 #include <cstring>
 #include <cctype>
+#include <ctime>
 #include <string>
+#include <iostream>
+
 
 // Módulos
 #include "back_end/back_end.hpp"
 #include "constantes.hpp"
 
 using namespace std;
+
+
+
+string string_data_fromatad(time_t time){
+    char buffer [20];
+    struct tm *infoTime = localtime(&time);
+
+    strftime(buffer, sizeof(buffer), "%d/%m/%Y:%H:%M:%S", infoTime);
+    return string(buffer);
+}
+
 
 // Funções auxiliares
 void input_all_fields(string* variables[], const string messages[], int size) {
@@ -87,19 +101,19 @@ void create_income(string *variables[], string messages[], string error_messages
 
     input_all_fields(variables, messages, size);
     int valid_fields_count = 0;
-    int error[4] = {0, 0, 0, 0};
+    int error[3] = {0, 0, 0};
 
     while (true) {
         valid_fields_count = 0;
         validate_source_income(*variables[0], *variables[1], *variables[2], error); 
-        for (int j = 0; j < 4; j++) {
+        for (int j = 0; j < 3; j++) {
             if (error[j] != 0) {
                 input_field_with_error(variables[j], messages[j], error_messages[j]);
             } else {
                 valid_fields_count++;
             }
         }
-        if (valid_fields_count == 4) {
+        if (valid_fields_count == 3) {
             cout << "Receita cadastrada com sucesso!\n";
             break;
         }
@@ -188,18 +202,25 @@ void menu(){
             cout << "\n\t ┌─────────────────────────────────┐";
             cout << "\n\t │    Vamos adicionar um gasto?    │";
             cout << "\n\t └─────────────────────────────────┘\n";
+            cin >> validate_entry;
+            cin.ignore();
+
             bool test = true;
+            time_t now = time(nullptr);
+            string date_today = string_data_fromatad(now);
             do{
-                cin >> validate_entry;
                 switch (validate_entry)
                 {
                 case 'S':
                 case 's':
                     create_expense(variables_expense, messages_expense, messages_error_expense, array_range);
-                    break;
+                break;
                 case 'N':
                 case 'n':
-                    //logica pra passar informções default 
+                        name_expense="default";
+                        choice_obligatory_expense = "n";
+                        value_expense = "0000.00"; 
+                        date_expense = date_today;
                 break;                
                 default:
                     cout << "Digite S ou N" << "\n";

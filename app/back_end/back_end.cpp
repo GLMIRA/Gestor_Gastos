@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include<vector>
+#include <vector>
 
 #include <unicode/unistr.h>
 #include <unicode/ustream.h>
@@ -354,7 +354,7 @@ void validate_expense(const string &name_expense,const string &type_expense,
 * @return: altera os valores do vetor erro .
 */   
 void validate_source_income(const string name_income, const string type_income,
-    const string amount_monthly, int((&error)[4])){
+    const string amount_monthly, int((&error)[3])){
  
     error[0] = validate_string_type_name(name_income)? 0 : 1;
     error[1] = validate_type(type_income) ? 0 : 2;
