@@ -357,6 +357,7 @@ void validate_source_income(const string &name_income, const string &type_income
     error[0] = validate_string_type_name(name_income) ? 0 : 1;
     error[1] = validate_type(type_income) ? 0 : 2;
     error[2] = validate_money_qtd(amount_monthly) ? 0 : 3;
+}
 /*------------------------------------------------------------------------------*/
 /*--------------------- functions to change type variables ---------------------*/
 /*------------------------------------------------------------------------------*/
