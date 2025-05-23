@@ -1,12 +1,29 @@
+#include <ctime>
+#include <iomanip>
+#include <string>
 
 #include <gtest/gtest.h>
 
 #include<back_end.hpp>
 
+string crete_date_today(){
+    
+    
+    time_t now = time(nullptr); 
+    tm* date_today = localtime(&now);
+
+    ostringstream oss;
+    oss << put_time(date_today, "%d/%m/%Y:%H:%M:%S" );
+
+    string date_to_test_true = oss.str();
+
+    return date_to_test_true;
+    
+}
 
 TEST(validateDateTime, validDateTime){
-    EXPECT_TRUE(validate_date_time("10/05/2025:12:30:12"));
-    EXPECT_TRUE(validate_date_time("13/05/2025:00:30:12"));
+    EXPECT_TRUE(validate_date_time(crete_date_today()));
+    EXPECT_TRUE(validate_date_time(crete_date_today()));
 }
 
 TEST(validadteDateTime, invalidDateTime){

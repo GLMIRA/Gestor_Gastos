@@ -19,13 +19,13 @@ using namespace std;
 * @return: altera os valores do vetor erro .
 */ 
 void validate_user(const string &cpf_formatted, const string &first_name,
-    const string &last_name, const string &age_user, int ((&error)[4]));
+    const string &last_name, const string &age_user, int *error);
 /*-----------------------validate expense-----------------------*/
 void validate_expense(const string &type_expense,const string &name_expense,
-    const string &amount, const string &date_time, int((&error)[4]));
+    const string &amount, const string &date_time, int *error);
 /*-----------------------validate income-----------------------*/
-void validate_source_icome(const string name_income, const string type_income,
-    const string amount_monthly, int((&error)[4]));
+void validate_source_income(const string &name_income, const string &type_income,
+    const string &amount_monthly,int *error);
 /*-----------------------funcutions to test-----------------------*/
 bool validate_date_time(const string &date_time);
 bool validate_type(const string &type);

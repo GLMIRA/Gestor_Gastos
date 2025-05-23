@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include<vector>
+#include <vector>
 
 #include <unicode/unistr.h>
 #include <unicode/ustream.h>
@@ -279,7 +279,7 @@ bool validate_birthdate(const string &birthdate){
 * @return: altera os valores do vetor erro .
 */ 
 void validate_user(const string &cpf_formatted, const string &first_name,
-const string &last_name, const string &birthdate, int ((&error)[4])){
+const string &last_name, const string &birthdate, int *error){
 
     // Validação e atribuição dos códigos de erro
     error[0] = validate_cpf(cpf_formatted) ? 0 : 1;
@@ -331,8 +331,7 @@ bool validate_date_time(const string &date_time){
 * @return: altera os valores do vetor erro .
 */ 
 void validate_expense(const string &name_expense,const string &type_expense,
-    const string &amount, const string &date_time, int((&error)[4])){
-
+    const string &amount, const string &date_time, int *error){
     // Validação e atribuição dos códigos de erro
     error[0] = validate_string_type_name(name_expense)? 0 : 1;
     error[1] = validate_type(type_expense) ? 0 : 2;
@@ -353,14 +352,14 @@ void validate_expense(const string &name_expense,const string &type_expense,
 * 
 * @return: altera os valores do vetor erro .
 */   
-void validate_source_icome(const string name_income, const string type_income,
-    const string amount_monthly, int((&error)[4])){
- 
-    error[0] = validate_string_type_name(name_income)? 0 : 1;
+void validate_source_income(const string &name_income, const string &type_income,
+                            const string &amount_monthly, int *error) {
+    error[0] = validate_string_type_name(name_income) ? 0 : 1;
     error[1] = validate_type(type_income) ? 0 : 2;
     error[2] = validate_money_qtd(amount_monthly) ? 0 : 3;
-    }
+}
 /*------------------------------------------------------------------------------*/
 /*--------------------- functions to change type variables ---------------------*/
 /*------------------------------------------------------------------------------*/
+
 
